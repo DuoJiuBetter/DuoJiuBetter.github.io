@@ -1,180 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>视频播放器</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        html {
-            height: 100%;
+            font-family: 'Microsoft YaHei', sans-serif;
         }
         body {
-            height: 100%;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            flex-direction: column;
         }
         .container {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-        }
-        .login-wrapper {
-            background-color: #fff;
-            border-radius: 15px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .login-wrapper:hover {
-            transform: translateY(-5px);
-        }
-        .header {
-            font-size: 32px;
-            font-weight: bold;
             text-align: center;
-            margin-bottom: 30px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 90%;
+        }
+        h1 {
             color: #333;
-            position: relative;
+            margin-bottom: 30px;
+            font-size: 2.5em;
         }
-        .header::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(to right, #a6c1ee, #fbc2eb);
-            margin: 10px auto;
-            border-radius: 2px;
-        }
-        .form-wrapper {
-            margin-bottom: 20px;
-        }
-        .input-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        .input-item {
-            display: block;
-            width: 100%;
-            padding: 15px 15px 15px 45px;
-            border: 1px solid #e1e1e1;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        .input-item:focus {
-            border-color: #a6c1ee;
-            box-shadow: 0 0 0 2px rgba(166, 193, 238, 0.2);
-        }
-        .input-item::placeholder {
-            color: #aaa;
-        }
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #aaa;
-        }
-        .btn {
-            padding: 15px;
-            width: 100%;
-            background: linear-gradient(to right, #a6c1ee, #fbc2eb);
-            color: #fff;
+        .play-btn {
+            background: linear-gradient(45deg, #FF416C, #FF4B2B);
+            color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(166, 193, 238, 0.3);
+            margin: 20px 0;
         }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(166, 193, 238, 0.4);
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255,75,43,0.3);
         }
-        .btn:active {
-            transform: translateY(0);
-        }
-        .msg {
-            text-align: center;
-            color: #666;
-            font-size: 14px;
+        .video-container {
+            display: none;
             margin-top: 20px;
+            max-width: 800px;
         }
-        a {
-            text-decoration: none;
-            color: #a6c1ee;
-            font-weight: 600;
-            transition: color 0.3s ease;
+        video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        a:hover {
-            color: #fbc2eb;
-            text-decoration: underline;
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
         }
-        .forgot-password {
-            text-align: right;
-            margin-bottom: 20px;
+        .control-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #f0f0f0;
+            transition: background 0.3s;
         }
-        .forgot-password a {
-            font-size: 14px;
-        }
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-            .login-wrapper {
-                padding: 30px 20px;
-            }
+        .control-btn:hover {
+            background: #ddd;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="login-wrapper">
-            <div class="header">Login</div>
-            <div class="form-wrapper">
-                <div class="input-group">
-                    <i class="input-icon">👤</i>
-                    <input type="text" placeholder="Username or Email" class="input-item">
-                </div>
-                <div class="input-group">
-                    <i class="input-icon">🔒</i>
-                    <input type="password" placeholder="Password" class="input-item">
-                </div>
-                <div class="forgot-password">
-                    <a href="#">Forgot Password?</a>
-                </div>
-                <button class="btn">Login</button>
-            </div>
-            <div class="msg">
-                Don't have an account?
-                <a href="#">Sign up</a>
+        <h1>🎬 欢迎观看视频</h1>
+        <button class="play-btn" onclick="showVideo()">点击播放视频</button>
+        
+        <div class="video-container" id="videoContainer">
+            <video id="myVideo" controls>
+                <!-- 这里替换为你的视频文件路径 -->
+                <source src="video.mp4" type="video/mp4">
+                <source src="video.webm" type="video/webm">
+                您的浏览器不支持视频播放。
+            </video>
+            <div class="controls">
+                <button class="control-btn" onclick="playVideo()">播放</button>
+                <button class="control-btn" onclick="pauseVideo()">暂停</button>
+                <button class="control-btn" onclick="restartVideo()">重新开始</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 简单的表单验证
-        document.querySelector('.btn').addEventListener('click', function() {
-            const username = document.querySelector('input[type="text"]').value;
-            const password = document.querySelector('input[type="password"]').value;
+        function showVideo() {
+            const videoContainer = document.getElementById('videoContainer');
+            const playBtn = document.querySelector('.play-btn');
             
-            if (!username || !password) {
-                alert('Please fill in all fields');
-                return;
-            }
+            videoContainer.style.display = 'block';
+            playBtn.style.display = 'none';
             
-            // 这里可以添加实际的登录逻辑
-            alert('Login successful!');
+            // 自动开始播放（有些浏览器需要用户交互）
+            const video = document.getElementById('myVideo');
+            video.play().catch(error => {
+                console.log('自动播放被阻止，需要用户交互');
+            });
+        }
+        
+        function playVideo() {
+            document.getElementById('myVideo').play();
+        }
+        
+        function pauseVideo() {
+            document.getElementById('myVideo').pause();
+        }
+        
+        function restartVideo() {
+            const video = document.getElementById('myVideo');
+            video.currentTime = 0;
+            video.play();
+        }
+        
+        // 视频结束事件
+        document.getElementById('myVideo').addEventListener('ended', function() {
+            alert('视频播放结束！');
         });
     </script>
 </body>
